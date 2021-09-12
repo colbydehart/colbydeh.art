@@ -27,13 +27,16 @@ export default function Home() {
           <li>
             <a href="https://sptfy.com/6nRV">Spotify</a>
           </li>
+          <li>
+            <a href="https://soundcloud.com/majesty_tn">Soundcloud</a>
+          </li>
         </ul>
       </p>
 
       <h2>Pages</h2>
       <ul>
         <li>
-          <Link href="/midi_sequencer">MIDI Sequencer</Link>
+          <Link href="/midi_sequencer">Simple MIDI Sequencer</Link>
         </li>
       </ul>
 

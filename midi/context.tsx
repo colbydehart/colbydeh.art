@@ -35,6 +35,7 @@ export const useOutput = (): WebMidi.MIDIOutput | undefined =>
 const getMidiAccess = async (
   setAccess: (access: WebMidi.MIDIAccess) => void
 ) => {
+  if (!window.navigator.requestMIDIAccess) return null;
   const access = await window.navigator.requestMIDIAccess();
   setAccess(access);
 };

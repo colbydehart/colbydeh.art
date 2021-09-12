@@ -1,12 +1,17 @@
 import React from "react";
 import { MIDIProvider, useOutput } from "../midi/context";
 import { OutputSelector } from "../components/OutputSelector";
+import styles from "../styles/sequencer.module.css";
 
 export default function MIDISequencer() {
   return (
     <div className="page-container">
-      <h2>MIDI Sequencer</h2>
-      <p>This is just a goofaround sequencer.</p>
+      <h2>Simple MIDI Sequencer</h2>
+      <p>This is just a lil' goofaround sequencer.</p>
+      <p>
+        This will only work on Chrome or a browser that has{" "}
+        <code>navigator.requestMIDIAccess</code>
+      </p>
       <MIDIProvider>
         <OutputSelector />
         <hr />
@@ -45,19 +50,23 @@ const Sequencer: React.FC = () => {
       }, 200)
     );
   }, [output, ticks, currentTick]);
+
   return (
     <>
       {ticks.map((tick, i) => (
-        <button
+        <div
           key={i}
+          className={tick ? styles.active : ""}
           style={{
-            color: tick ? "white" : "grey",
-            background: tick ? "009" : "#900",
+            borderColor: currentTick === i ? "white" : "grey",
+            borderStyle: "solid",
+            borderWidth: "1px",
+            width: "40px",
+            height: "40px",
+            display: "inline-block",
           }}
           onClick={() => toggleTick(i)}
-        >
-          {tick ? "On" : "Off"}
-        </button>
+        ></div>
       ))}
     </>
   );
