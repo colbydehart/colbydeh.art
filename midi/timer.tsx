@@ -1,6 +1,6 @@
 import React from "react";
 
-const useClock = (
+export const useClock = (
   handleTick: (tick: number) => void,
   intialBars: number = 120,
   initialBpm: number = 4
@@ -12,24 +12,24 @@ const useClock = (
   /** number of measures  */
   const [bars, setBars] = React.useState(intialBars);
 
-  const advanceClock = () => {
+  const advanceClock = React.useCallback(() => {
     const now = new Date();
 
-    // 60 / bpm === one quarter note length in seconds, multiply that by 1000
+    // 60 / bpm === one quarter note length in seconds, divide that by 1000
     // to get the time of one quarter note in milliseconds, then divide that by
     // 192 which is the division we use for a tick, a 192nd note. It's 64 * 3
     // so you can do triplets
-    if (+lastTime < +now - ((60 / bpm) * 1000) / 192) {
+    if (+lastTime < +now - 60 / bpm / 1000 / 192) {
       handleTick(tick);
       setLastTime(now);
       setTick((tick + 1) % (192 * 4 * bars));
     }
-
-    window.setTimeout(advanceClock, 0);
-  };
+  }, [handleTick]);
 
   React.useEffect(() => {
     const timerId = window.setInterval(advanceClock, 0);
     return () => window.clearInterval(timerId);
   }, [handleTick]);
+
+  return { setBars, setBpm };
 };

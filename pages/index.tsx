@@ -20,24 +20,27 @@ export default function Home() {
       <p>
         I play music under the name <strong>Majesty</strong>. Here are some
         links where you can listen to my music:
-        <ul>
-          <li>
-            <a href="https://majesty.bandcamp.com/">Bandcamp</a>
-          </li>
-          <li>
-            <a href="https://sptfy.com/6nRV">Spotify</a>
-          </li>
-          <li>
-            <a href="https://soundcloud.com/majesty_tn">Soundcloud</a>
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <a href="https://majesty.bandcamp.com/">Bandcamp</a>
+        </li>
+        <li>
+          <a href="https://sptfy.com/6nRV">Spotify</a>
+        </li>
+        <li>
+          <a href="https://soundcloud.com/majesty_tn">Soundcloud</a>
+        </li>
+      </ul>
 
       <h2>Pages</h2>
       <ul>
         <li>
           <Link href="/midi_sequencer">Simple MIDI Sequencer</Link>
         </li>
+        {/* <li> */}
+        {/*   <Link href="/ice_cold_beer">Ice Cold Beer</Link> */}
+        {/* </li> */}
       </ul>
 
       <hr />
