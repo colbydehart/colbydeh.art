@@ -19,6 +19,20 @@ export const Header: React.FC = () => {
             width={30}
           />
         </a>
+
+        <a
+          href="https://www.instagram.com/trucks01/"
+          style={{ marginLeft: "1rem", position: "relative", top: "0.5rem" }}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/instagram.png"
+            alt="Instagram @trucks01"
+            height={30}
+            width={30}
+          />
+        </a>
       </div>
       <hr />
     </h1>
