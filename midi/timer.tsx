@@ -31,5 +31,5 @@ export const useClock = (
     return () => window.clearInterval(timerId);
   }, [handleTick]);
 
-  return { setBars, setBpm };
+  return { setBars, setBpm, bpm };
 };

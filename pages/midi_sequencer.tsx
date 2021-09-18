@@ -52,7 +52,6 @@ const Sequencer: React.FC = () => {
 
   const handleTick = (tick: number) => {
     // quarter note
-    console.log(tick);
     if (tick % 192 === 0) {
       steps[current] && output?.send([0x90, 60, 0x7f]);
       setCurrent((current + 1) % 8);

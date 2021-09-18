@@ -4,55 +4,7 @@ import Image from "next/image";
 import Matter from "matter-js";
 
 export default function IceColdBeer() {
-  const [bar, setBar] = React.useState<Matter.Body | undefined>(undefined);
-  const handleKeyDown = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (!bar) return;
-      switch (e.code) {
-        case "KeyK": {
-          console.log("right up");
-          bar.angle += 1;
-        }
-        case "KeyJ":
-          console.log("right down");
-        case "KeyD":
-          console.log("left up");
-        case "KeyF":
-          console.log("left down");
-      }
-    },
-    [bar]
-  );
-  // https://reactjs.org/docs/hooks-faq.html#how-can-i-measure-a-dom-node
-  const gameRef = React.useCallback((node) => {
-    if (node !== null) {
-      document.body.addEventListener("keydown", handleKeyDown);
-      const engine = Matter.Engine.create();
-      const render = Matter.Render.create({
-        element: node,
-        engine: engine,
-      });
-
-      const ball = Matter.Bodies.circle(400, 200, 20);
-      const newBar = Matter.Bodies.rectangle(400, 590, 800, 10, {
-        isStatic: true,
-      });
-      setBar(newBar);
-
-      // add all of the bodies to the world
-      Matter.Composite.add(engine.world, [ball, newBar]);
-
-      // run the renderer
-      Matter.Render.run(render);
-
-      // create runner
-      var runner = Matter.Runner.create();
-
-      // run the engine
-      Matter.Runner.run(runner, engine);
-    }
-  }, []);
-
+  React.useEffect(initialize, []);
   return (
     <div className="page-container">
       <Header />
@@ -71,7 +23,58 @@ export default function IceColdBeer() {
         width={200}
       />
       <hr />
-      <div ref={gameRef} />
+      <div id="game" />
     </div>
   );
 }
+
+const initialize = () => {
+  const engine = Matter.Engine.create();
+  const render = Matter.Render.create({
+    element: window.document.getElementById("game"),
+    engine: engine,
+    options: {
+      width: 400,
+    },
+  });
+
+  const ball = Matter.Bodies.circle(200, 200, 10);
+  const bar = Matter.Bodies.rectangle(400, 590, 800, 10, {
+    isStatic: true,
+  });
+
+  // add all of the bodies to the world
+  Matter.Composite.add(engine.world, [ball, bar]);
+
+  // run the renderer
+  Matter.Render.run(render);
+
+  // create runner
+  var runner = Matter.Runner.create();
+
+  // run the engine
+  Matter.Runner.run(runner, engine);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case "KeyK":
+        {
+          console.log("right up");
+          console.log(bar);
+          Matter.Body.rotate(bar, 0.02);
+        }
+        break;
+      case "KeyJ":
+        console.log("right down");
+        Matter.Body.rotate(bar, -0.02);
+        break;
+      case "KeyD":
+        console.log("left up");
+        break;
+      case "KeyF":
+        console.log("left down");
+        break;
+    }
+  };
+  document.body.addEventListener("keydown", handleKeyDown);
+};
