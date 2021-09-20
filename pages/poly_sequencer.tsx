@@ -34,7 +34,7 @@ const initialSequencer = {
 
 const Sequencer: React.FC = () => {
   const output = useOutput();
-  const [sequencers, setSequencers] = React.useState<Sequencer[]>([
+  const [sequencers, setSequencers] = React.useState([
     initialSequencer,
     initialSequencer,
     initialSequencer,
@@ -56,9 +56,6 @@ const Sequencer: React.FC = () => {
       />
 
       <hr />
-      {sequencers.map((sequencer) => {
-        <SubSequencer sequencer={sequencer} />;
-      })}
     </>
   );
 };
