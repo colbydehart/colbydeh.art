@@ -25,11 +25,24 @@ export default function PolySequencer() {
   );
 }
 
+const initialSteps = [false, false, false, false];
+
+const initialSequencer = {
+  steps: initialSteps,
+  measure: 0.25,
+};
+
 const Sequencer: React.FC = () => {
   const output = useOutput();
+  const [sequencers, setSequencers] = React.useState<Sequencer[]>([
+    initialSequencer,
+    initialSequencer,
+    initialSequencer,
+    initialSequencer,
+  ]);
   const onTick = (tick: number) => null;
   const { setBpm, bpm } = useClock(onTick, 4, 120);
-  const playNote = ()
+  const playNote = () => {};
 
   return (
     <>
@@ -43,6 +56,9 @@ const Sequencer: React.FC = () => {
       />
 
       <hr />
+      {sequencers.map((sequencer) => {
+        <SubSequencer sequencer={sequencer} />;
+      })}
     </>
   );
 };
